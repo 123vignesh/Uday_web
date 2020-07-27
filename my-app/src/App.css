@@ -10,3 +10,213 @@
   padding:0;
   box-sizing: border-box;
 }
+.top-left {
+  position: absolute;
+  top: 80px;
+  left: 16px;
+}
+.container1 {
+  position: relative;
+}
+
+.container::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%; /* set to 100% for full overlay width */
+  background: linear-gradient(to bottom, rgba(232,208,148,0.3) 0%,rgba(232,208,148,0.8) 100%);
+}
+
+.img {
+  display: block;
+  width: 100%;
+}
+
+/* misc */
+
+body {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.header1 {
+  height: 65vh;
+  background-image: linear-gradient(
+    rgba(0,0,0,0.8),
+    rgba(0,0,0,0.8)
+    ),
+    url("../src/images/intro.png.jpg");
+  background-size: cover;
+  background-position: top;
+  position: relative;  
+}
+
+.box1{
+  position:absolute;
+ margin-top: 300px;
+ width:900px;
+ left:50%;
+  box-sizing: border-box;
+  transform:translate(-50%,-50%);
+  display:flex;
+  transition:0.5s;
+  background-color:lightgray;
+  margin-bottom: 100px;
+  
+  
+}
+.box1 .imgbox{
+  width:650px;
+  flex: 0 0 150px;
+}
+.box1 .imgbox {
+  max-width:100%;
+}
+img{
+  padding-top: 20px;
+  width:220px;
+  height:440px;
+  
+}
+.bat {
+ 
+}
+.bat {
+  display:inline-flex;
+  padding-top: 30px; 
+  margin-bottom: 250px;
+}
+
+.box1 .content2{
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+.box1 .content2 h2{
+  margin:0;
+  padding-left: 0;
+  font-size: 22px;
+  height:80px;
+
+}
+.box1:hover{
+  box-shadow: o 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.box1 .content p{
+  margin:0;
+  margin:10px 0 0;
+  text-align: justify;
+}
+
+
+.page-heading {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #aaa;
+  white-space: nowrap;
+}
+
+.page-heading-primary {
+  display: block;
+  font-size: 3.125rem;
+  font-weight: 300;
+  color: #3498db;
+}
+
+.page-heading-secondary {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4.5px;
+}
+
+
+
+
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+.fat{
+  margin-top: 100px;
+  display: inline-flex;
+  
+  
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+div.gallery {
+  border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+@media only screen and (max-width:800px) {
+  
+  .main {
+    width: 80%;
+    padding: 0;
+  }
+  .right {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+ 
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
+
+
+
+
+

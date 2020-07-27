@@ -5,7 +5,8 @@ import pintro from "../images/image.jpg"
 import "../App.css";
 import {Link,Redirect} from "react-router-dom";
 
-export default class About extends Component {  
+
+export default class News extends Component {  
     render() {
         return (
             <div>

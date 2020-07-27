@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import {Link,Switch,Route} from "react-router-dom";
 import styled from "styled-components";
 export default class Navbar extends Component {
     render() {
@@ -12,12 +12,48 @@ export default class Navbar extends Component {
   </button>
   <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div className="navbar-nav">
-      <a className="nav-item nav-link active" href="#">Professionals <span className="sr-only">(current)</span></a>
+    
+    <Link to="/">
+    <a className="nav-item nav-link " href="#">Home </a> 
+    </Link>
+   
+      
+      <Link to="Professionals">
+      <a className="nav-item nav-link " href="#">Professionals </a>
+      </Link>
+      
+      
+      <Link to="/Religious">
       <a className="nav-item nav-link" href="#">Religious</a>
-      <a className="nav-item nav-link" href="#">News</a>
-      <a className="nav-item nav-link" href="#">Gallery</a>
+      </Link>
+      
+   
+
+   <Link to="/News">
+   <a className="nav-item nav-link" href="#">News</a>
+   </Link>
+     
+   
+   
+   
+   
+   
+   <Link to="/Gallery">
+   <a className="nav-item nav-link" href="#">Gallery</a>
+   
+   </Link>
+      
+   
+   
+   
+      <Link to="/About">
       <a className="nav-item nav-link" href="#">About</a>
-      <a className="nav-item nav-link" href="#">Contact us</a>
+      </Link>
+      
+      
+      <Link to="/Contact">
+      <a className="nav-item nav-link active" href="#">Contact us <span className="sr-only">(current)</span></a>
+      </Link>
     </div>
   </div>
 </nav>
