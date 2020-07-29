@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import { Base64 } from 'js-base64';
-import { encode, decode } from 'js-base64';
+
 import "../App.css";
 import {Link,Redirect} from "react-router-dom";
 import axios from "axios";
@@ -14,8 +13,7 @@ export default class Gallery extends Component {
 
     this.state={
       data:[],
-      contentType:"",
-      bata:""
+      url:""
     }
   }
 
@@ -28,13 +26,13 @@ componentDidMount=()=>{
     .then((response)=>{
       
       const data=(response.data);
-      this.setState({data:data,contentType:data[0].image.img.contentType,bata:data[0].image.img.data.data});
+      const url=(response.data[0].image);
+      this.setState({data:data,url:url});
       console.log("images has been recieved");
-      console.log(this.state.data.image.img.data.data);
+      console.log(this.state.data);
+     console.log(this.state.data.length);
       
-     
-
-    })
+      })
     .catch(()=>{
       alert("Error retrieving data!!");
     })
@@ -43,8 +41,16 @@ componentDidMount=()=>{
 
    
 render() {
+  
+  var rows = [];
+for (var i = 0; i < (this.state.data.length); i++) {
+    
+    rows.push(<img key={this.state.data.id} src={this.state.data[i].image} style={{width:"20%",marginLeft:"20px",float:"left"}}/>);
+}
+  
+
       
-      
+     
         return (
             <div>
                 <Navbar/>
@@ -52,10 +58,10 @@ render() {
                 <div>
                   
 
-			
-<img src={"data:image/png;base64," +
-            new String(Base64.encode(this.bata)) +
-            "/"       }            />
+		{rows}
+   	
+  
+
      
     
                 </div>
