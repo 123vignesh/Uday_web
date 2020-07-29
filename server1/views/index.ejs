@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<title>Image Uploading</title> 
+</head> 
+
+<body> 
+	<h1>To Upload Image on mongoDB</h1> 
+	<hr> 
+	<div> 
+		<form action="/" method="POST" enctype="multipart/form-data" style="margin-left: 50px;"> 
+			<div> 
+				<label for="name">Image Title</label> <br/><br/>
+				<input type="text" id="name" placeholder="Name"
+					value="" name="name" required> 
+			</div> <br/><br/>
+			<div> 
+				<label for="desc">Image Description</label> <br/><br/>
+				<textarea id="desc" name="desc" value="" rows="2"
+						placeholder="Description" required> 
+				</textarea> 
+			</div> <br/><br/>
+			<div> 
+				<label for="image">Upload Image</label><br/><br/> 
+				<input type="file" id="image"
+					name="image" value="" required> 
+			</div> 
+			<div> <br/><br/>
+				<button type="submit" style="width: 100px; height: 50px;background-color: aqua;border-radius: 2px;">Submit</button> 
+			</div> 
+		</form> 
+	</div> 
+
+	<hr> 
+
+	
+</body> 
+
+</html> 
