@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import {Link,Redirect} from "react-router-dom";
-import axios from "axios";
 import Footer from "./Footer";
+
+// import "../App.css";
+import {Link,Redirect} from "react-router-dom";
 import Common from './Common';
 import SimpleImageSlider from "react-simple-image-slider";
-export default class Professionals extends Component { 
-  
+import axios from "axios";
+
+export default class Family extends Component {  
+
   constructor(props){
     super(props);
 
     this.state={
       data:[]
-      
     }
   }
-
-componentDidMount=()=>{
-  this.getProfPost();
-}
-
-  getProfPost=()=>{
+  componentDidMount=()=>{
+    this.getFamPost();
+  }
+          
+                          
+  getFamPost=()=>{
     axios.get("http://localhost:4000/image")
     .then((response)=>{
       console.log("images has been recieved");
@@ -34,18 +36,16 @@ this.setState({data:data});
       alert("Error retrieving data!!");
     })
   }
-
-
-   
-render() {
-  
+    render() {
+      var rows = [];
+     
  
   var images = [];
   var rows=[];
   var caro=[];
 console.log(this.state.data);
   for(var i=0;i<this.state.data.length;i++){
-    if(this.state.data[i].page==="Professional"){
+    if(this.state.data[i].page==="Family"){
     images.push(<div className="single" style={{width:"500px"}}>
       <img  src= {`data:${this.state.data[i].contentType};base64,${this.state.data[i].image}`}  style={{width:"500px",height:"300px"}} />
       <div style={{width:"500px"}}><h3>{this.state.data[i].desc}</h3></div>
@@ -60,7 +60,7 @@ console.log(this.state.data);
       
           
       for(var k=j+1;k<this.state.data.length;k++){
-        if(this.state.data[j].page==="professional" && this.state.data[j].desc===this.state.data[k].desc){
+        if(this.state.data[j].page==="family" && this.state.data[j].desc===this.state.data[k].desc){
           rows.push({url:  `data:${this.state.data[j].contentType};base64,${this.state.data[j].image}`}
           );
           rows.push({url:  `data:${this.state.data[k].contentType};base64,${this.state.data[k].image}`}
@@ -80,26 +80,18 @@ console.log(this.state.data);
       }
     
     }
-
-
-      
-     
         return (
-            <div>
-                 <Common name="Professionals"/>
-                 
-                 <div className="final">
+          <>
+          <Common name="Family"/>
+          <div className="final">
               {images}
 
 
 </div>
 {caro}
-                 
-                
-                
-               
-            </div>
-           
+
+             
+           </>
         )
     }
 }

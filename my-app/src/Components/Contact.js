@@ -1,20 +1,18 @@
-import React, { Component } from 'react'
-import Footer from "./Footer";
-import Navbar from "./Navbar";
-import "../App.css";
-import {Link,Redirect} from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee,faEnvelopeSquare,faLocationArrow,faPhone } from '@fortawesome/free-solid-svg-icons'
-
-
-
-export default class Contact extends Component {
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faEnvelopeSquare,faPhoneAlt,faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import Common from './Common';
+import axios from "axios";
+export default class Contact extends Component{
     constructor(props) {
         super(props);
         this.state={
             name:"",
             email:"",
             phone:"",
+            subject:"",
             message:""
     };
 }
@@ -34,6 +32,11 @@ export default class Contact extends Component {
             email:event.target.value
         });
     }
+    handleChangeSubject= event =>{
+        this.setState({
+            subject:event.target.value
+        });
+    }
     handleChangePhone= event =>{
         this.setState({
             phone:event.target.value
@@ -42,86 +45,135 @@ export default class Contact extends Component {
 
     handleSubmit = event =>{
         event.preventDefault();
+        console.log(this.state);
+        var user = {
+            name: this.state.name,
+            email: this.state.email,
+            phone: this.state.phone,
+            subject:this.state.subject,
+            message:this.state.message
+        }
+        axios
+      .post("http://localhost:2000/users",user)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     }
-    
-    render() {
-        
-         return (
-            <div>
-                <Navbar />
-         <div className="fat">
-             
-             <div style={{marginRight:"100px",marginLeft:"7px"}}>
-                 <FontAwesomeIcon icon={faLocationArrow} style={{fontSize:"50px"}}/>
-                 <p>A24, Kunal Nest Manik Colony, Pimpri Chinchwad Link</p> <p>Road,Opposite Ambika Super Shopee Front, Near Darshan </p>
-                 <p>Hall, Chinchwad, Pune, 411033</p>
-                 
-             </div>
-             <div style={{marginRight:"160px",marginLeft:"380"}}>
-             <FontAwesomeIcon icon={faEnvelopeSquare} style={{fontSize:"50px"}}/>
-             <p>uday.patkar@bharatividyapeeth.edu</p>
+    render(){
+        return( 
+        <>
+            <Common name="Contact"/>
+{/* contact information start */}
+            <div className="container mt-5 paata"  >
+                <div className="row">
+                    <div class="col-lg-4 col-md-4 col-12">
+                    <div className="icon-box icon-box-green text-center">
+                        <div className="icon">
+                            <FontAwesomeIcon icon={faMapMarkerAlt} style={{fontSize:"40px", color: "#18d26e"}}/>
+                            </div>
+                            <div className="mt-3">
+                            <p>A24, Kunal Nest Manik Colony,Pimpri Chinchwad Link Road, Chinchwad, Pune, 411033</p>
+                            </div>
+                        </div> 
+                    </div>
 
-             <p> patkarudayc@gmail.com</p>
+                    <div className="col-lg-4 col-md-4 col-12">
+                        <div className="icon-box icon-box-green text-center">
+                            <div className="icon">
+                            <FontAwesomeIcon icon={faPhoneAlt} style={{fontSize:"40px",color: "#18d26e"}}/>
+                            </div>
+                            <div className="mt-3">
+                           <p><a style={{color:"black",textDecoration:"none"}} href="tel:+91 97669 38249">+91 97669 38249</a></p>
+                           <p><a style={{color:"black",textDecoration:"none"}} href="tel:+9198505 34525">+9198505 34525</a></p>
+                            </div>
+                        </div>
+                    </div>
 
-            <p>support@udaypatkar.com</p>
-             </div>
-
-             <div style={{marginRight:"170px",marginLeft:"350"}}>
-             <FontAwesomeIcon icon={faPhone} style={{fontSize:"50px"}}/>
-             <p>+91 97669 38249</p>
-
-             <p> +9198505 34525</p>
-             </div>
-             
-            
-
-         </div>
-
-
-
-                <div className="App">
-                    <h1 style={{marginTop:"100px"}}>Contact Information</h1>
-                
-                <form onSubmit={this.handleSubmit} style={{marginTop:"50px",marginBottom:"100px"}}>
-                    
-                    <input 
-                    type="text"
-                    placeholder="Name" 
-                    value={this.state.name}
-                    name="name"
-                    onChange = {this.handleChangeName}
-                    style={{width:"550px" ,height:"40px",padding:"5px"}}
-                    required/>
-                  
-                    <div></div>
-                    <input type="email"
-                    placeholder="Email" 
-                    value={this.state.email}
-                    name="email"
-                    style={{width:"550px" ,marginTop:"20px" ,height:"40px",padding:"5px"}}
-                    onChange = {this.handleChangeEmail} required/>
-                       <div></div>
-                   
-                    <input type="text" 
-                    value={this.state.phone}
-                    placeholder="Phone no"
-                    name="phone"
-                    style={{width:"550px" ,marginTop:"20px",height:"40px",padding:"5px"}}
-                    onChange = {this.handleChangePhone} required/><br/>
-                              
-                   
-                    <textarea type="text" 
-                    value={this.state.message}
-                    placeholder="Message"
-                    name="message"
-                    style={{width:"550px" ,marginTop:"20px",height:"90px",padding:"5px"}}
-                    onChange = {this.handleChangeMessage} />  <br/>
-
-              <button type="submit"  style={{width:"300px" ,marginTop:"20px",backgroundColor:"blue",color:"black",height:"60px"}}>Submit</button>
-                </form>
+                    <div className="col-lg-4 col-md-4 col-12">
+                    <div className="icon-box icon-box-green text-center">
+                        <div className="icon">
+                            <FontAwesomeIcon icon={faEnvelopeSquare} style={{fontSize:"40px",color: "#18d26e"}}/>
+                            </div>
+                            <div className="mt-3">
+                            <p><a style={{color:"black",textDecoration:"none"}} href="mailto:patkarudayc@gmail.com">patkarudayc@gmail.com</a></p>
+                            <p><a style={{color:"black",textDecoration:"none"}} href="mailto:support@udaypatkar.com">support@udaypatkar.com</a></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <Footer/>
             </div>
+        
+{/* contact information end */}
+
+{/* form start */}
+            <div className="my-5">
+                <h1 className="text-center" style={{color:"#16162D"}}>Contact Me</h1>
+                <p className="text-center cont">Fields marked with an <span style={{color:"red"}}>*</span> are required</p>
+            </div>
+            <div className="container contact_div">
+                <div className="row">
+                    <div className="col-md-8 col-10 mx-auto">  
+
+    <form style={{marginBottom:"200px"}} onSubmit={this.handleSubmit}>
+                    <div class="form-group mb-4 cont" >
+                        <label for="exampleFormControlInput1">Full Name<span style={{color:"red"}}>*</span></label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" 
+                        name="name"
+                        value={this.state.name}
+                        onChange = {this.handleChangeName}
+                        required/>
+                    </div>
+
+                    <div class="form-group mb-4 cont">
+                        <label for="exampleFormControlInput1">Phone<span style={{color:"red"}}>*</span></label>
+                        <input type="number" class="form-control" id="exampleFormControlInput1" 
+                        name="phone"
+                        value={this.state.phone}
+                        onChange = {this.handleChangePhone}
+                        required/>
+                    </div>
+
+                    <div class="form-group mb-4 cont">
+                        <label for="exampleFormControlInput1">Email address<span style={{color:"red"}}>*</span></label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" 
+                        name="email"
+                        value={this.state.email}
+                        onChange = {this.handleChangeEmail}
+                        required/>
+                    </div>
+
+                    <div class="form-group mb-4 cont">
+                        <label for="exampleFormControlInput1">Subject<span style={{color:"red"}}>*</span></label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" 
+                        name="subject"
+                        value={this.state.subject}
+                        onChange = {this.handleChangeSubject}
+                        required/>
+                    </div>
+
+                    <div class="form-group mb-4 cont">
+                        <label for="exampleFormControlTextarea1">Any Suggestion</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                        style={{backgroundColor:"#F8F8F8",border: "2px solid #ccc"}}
+                        name="message"
+                        value={this.state.message}
+                        onChange = {this.handleChangeMessage}
+                        required></textarea>
+                    </div>
+
+                    <div class="col-12 text-center">
+                        <button type="submit">Send Message</button>
+                    </div>
+    </form>
+
+                    </div>
+                </div>
+            </div>
+{/* form end */}
+        </>
         )
-    }
-}
+    };
+};

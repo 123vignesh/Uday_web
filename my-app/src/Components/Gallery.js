@@ -1,36 +1,34 @@
 import React, { Component } from 'react';
-import Footer from "./Footer";
-import Navbar from "./Navbar";
-
-import "../App.css";
 import {Link,Redirect} from "react-router-dom";
 import axios from "axios";
-
+import Common from './Common';
+import SimpleImageSlider from "react-simple-image-slider";
 export default class Gallery extends Component { 
   
   constructor(props){
     super(props);
 
     this.state={
-      data:[],
-      url:""
+      
+      data:[]
+      
     }
   }
 
 componentDidMount=()=>{
   this.getBlogPost();
+  
 }
 
   getBlogPost=()=>{
-    axios.get("http://localhost:2000/images")
+    axios.get("http://localhost:4000/image")
     .then((response)=>{
-      
-      const data=(response.data);
-      const url=(response.data[0].image);
-      this.setState({data:data,url:url});
       console.log("images has been recieved");
-      console.log(this.state.data);
-     console.log(this.state.data.length);
+      console.log(response.data);
+      const data=(response.data);
+      console.log(response.data.page);
+this.setState({data:data});
+     
       
       })
     .catch(()=>{
@@ -42,35 +40,64 @@ componentDidMount=()=>{
    
 render() {
   
-  var rows = [];
-for (var i = 0; i < (this.state.data.length); i++) {
-    
-    rows.push(<img key={this.state.data.id} src={this.state.data[i].image} style={{width:"20%",marginLeft:"20px",float:"left"}}/>);
-}
-  
+  var images = [];
+  var rows=[];
+  var caro=[];
+console.log(this.state.data);
+  for(var i=0;i<this.state.data.length;i++){
+    if(this.state.data[i].page==="Gallery"){
+    images.push(<div className="final">
+    <div className="single" >
+      <img id="paaru" src= {`data:${this.state.data[i].contentType};base64,${this.state.data[i].image}`}   />
+      <div style={{width:"500px"}}><h3>{this.state.data[i].desc}</h3></div>
+     </div>
+     </div>
+      );
+    }
+  }
 
+
+    for(var j=0;j<this.state.data.length;j++){
       
-     
-        return (
-            <div>
-                <Navbar/>
-                <div className="App">
-                <div>
-                  
-
-		{rows}
-   	
-  
-
-     
+      
+          
+      for(var k=j+1;k<this.state.data.length;k++){
+        if(this.state.data[j].page==="gallery" && this.state.data[j].desc===this.state.data[k].desc){
+          rows.push({url:  `data:${this.state.data[j].contentType};base64,${this.state.data[j].image}`}
+          );
+          rows.push({url:  `data:${this.state.data[k].contentType};base64,${this.state.data[k].image}`}
+          );
+          
+          caro.push(<div className="final">
+          <div className="single">
+             <SimpleImageSlider
+                       width={500}
+                      height={300}
+                      images={rows}
+                      className="paaru"
+                     id="kaaru"     />
+    <div style={{width:"500px"}}><h3>{this.state.data[j].desc}</h3></div>
+          
+          </div>
+          </div>);
+        }
+      }
     
-                </div>
-                
-
-                </div>
-                <Footer/>
-            </div>
+    }
+    
+    
+return (
            
-        )
+  <>   
+  
+  <Common name="Gallery"/>           
+<div className="past">
+              {images}
+              {caro}
+
+</div>
+
+</>
+)
     }
 }
